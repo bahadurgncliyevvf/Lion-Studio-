@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lion Studio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- CINEMATIC BACKGROUND -->
+<div class="ambient ambient-blue"></div>
+<div class="ambient ambient-red"></div>
+<div class="ambient ambient-gold"></div>
+<div class="particles"></div>
+
+<!-- INTRO -->
+<section id="introScreen" class="screen intro-screen">
+
+    <video
+        id="introVideo"
+        class="intro-video"
+        src="Giris.mp4"
+        autoplay
+        muted
+        playsinline>
+    </video>
+
+    <div class="introOverlay"></div>
+
+    <div id="introLogoBox" class="intro-logo-box">
+        <img
+            src="Remove_words_and_resize_image_20260919233757.jpeg"
+            class="intro-logo"
+            alt="Lion Studio">
+        <div class="intro-logo-line"></div>
+        <div class="intro-loading">LION STUDIO</div>
+    </div>
+
+    <button id="skipIntro" class="skip-intro">
+        KEÇ
+    </button>
+</section>
+
+
+<!-- AUTH -->
+<section id="authScreen" class="screen auth-screen hidden">
+
+    <div class="auth-center">
+
+        <img
+            src="Remove_words_and_resize_image_20260919233757.jpeg"
+            class="auth-logo"
+            alt="Lion Studio">
+
+        <div class="auth-title">LION STUDIO</div>
+        <div class="auth-subtitle">Film • Serial • Studio</div>
+
+        <div class="auth-buttons">
+            <button id="userLoginBtn" class="main-btn blue-btn">
+                İSTİFADƏÇİ GİRİŞİ
+            </button>
+
+            <button id="adminLoginBtn" class="main-btn red-btn">
+                ADMIN GİRİŞİ
+            </button>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- USER GOOGLE LOGIN -->
+<div id="googleModal" class="modal hidden">
+
+    <div class="modal-card login-card">
+
+        <button class="close-modal" data-close="googleModal">×</button>
+
+        <div class="google-icon">G</div>
+
+        <h2>Google Hesabı</h2>
+        <p>Lion Studio istifadə etmək üçün daxil olun.</p>
+
+        <input
+            id="googleName"
+            class="input"
+            type="text"
+            placeholder="Adınızı yazın">
+
+        <button id="googleContinue" class="main-btn blue-btn">
+            GOOGLE İLƏ DAVAM ET
+        </button>
+
+    </div>
+</div>
+
+
+<!-- ADMIN LOGIN -->
+<div id="adminModal" class="modal hidden">
+
+    <div class="modal-card login-card">
+
+        <button class="close-modal" data-close="adminModal">×</button>
+
+        <div class="admin-symbol">LS</div>
+
+        <h2>ADMIN GİRİŞİ</h2>
+        <p>Yalnız Admin üçün.</p>
+
+        <input
+            id="adminCode"
+            class="input"
+            type="password"
+            placeholder="Admin kodu">
+
+        <button id="adminContinue" class="main-btn red-btn">
+            GİRİŞ
+        </button>
+
+        <div id="adminError" class="login-error"></div>
+
+    </div>
+</div>
+
+
+<!-- VERIFYING -->
+<section id="verifyingScreen" class="screen verifying-screen hidden">
+
+    <div class="verify-container">
+
+        <div id="verifyRing" class="verify-ring">
+            <div class="verify-core">
+                <span id="verifyIcon">LS</span>
+            </div>
+        </div>
+
+        <div id="verifyTitle" class="verify-title">
+            VERIFYING
+        </div>
+
+        <div id="verifyText" class="verify-text">
+            Hesabınız doğrulanır...
+        </div>
+
+        <div class="verify-progress">
+            <div id="verifyProgressBar"></div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- MAIN APPLICATION -->
+<section id="appScreen" class="app-screen hidden">
+
+    <header class="topbar">
+
+        <div class="brand">
+            <img
+                src="Remove_words_and_resize_image_20260919233757.jpeg"
+                alt="Lion Studio">
+            <span>LION STUDIO</span>
+        </div>
+
+        <nav class="nav">
+            <button class="nav-btn active" data-page="homePage">ANA SƏHİFƏ</button>
+            <button class="nav-btn" data-page="filmsPage">FİLMLƏR</button>
+            <button class="nav-btn" data-page="seriesPage">SERİALLAR</button>
+            <button class="nav-btn" data-page="myListPage">MƏNİM SİYAHIM</button>
+        </nav>
+
+        <div class="user-area">
+            <span id="currentUserName">Qonaq</span>
+            <button id="logoutBtn" class="small-btn">ÇIXIŞ</button>
+        </div>
+
+    </header>
+
+
+    <!-- HOME -->
+    <main id="homePage" class="page active-page">
+
+        <div id="heroEmpty" class="empty-hero">
+
+            <div class="empty-glow"></div>
+
+            <img
+                src="Remove_words_and_resize_image_20260919233757.jpeg"
+                alt="Lion Studio">
+
+            <h1>LION STUDIO</h1>
+
+            <p>
+                Burada Admin tərəfindən yayımlanan filmlər və seriallar görünəcək.
+            </p>
+
+            <div class="empty-line"></div>
+
+            <span>HƏLƏ YAYIMLANMIŞ KONTENT YOXDUR</span>
+
+        </div>
+
+        <div id="homeContent" class="content-area"></div>
+
+    </main>
+
+
+    <!-- FILMS -->
+    <main id="filmsPage" class="page">
+
+        <div class="page-heading">
+            <h1>FİLMLƏR</h1>
+            <p>Admin tərəfindən yayımlanan filmlər</p>
+        </div>
+
+        <div id="filmsGrid" class="movie-grid"></div>
+
+    </main>
+
+
+    <!-- SERIES -->
+    <main id="seriesPage" class="page">
+
+        <div class="page-heading">
+            <h1>SERİALLAR</h1>
+            <p>Admin tərəfindən yayımlanan seriallar</p>
+        </div>
+
+        <div id="seriesGrid" class="movie-grid"></div>
+
+    </main>
+
+
+    <!-- MY LIST -->
+    <main id="myListPage" class="page">
+
+        <div class="page-heading">
+            <h1>MƏNİM SİYAHIM</h1>
+            <p>Yadda saxladığınız kontent</p>
+        </div>
+
+        <div id="myListGrid" class="movie-grid"></div>
+
+    </main>
+
+
+    <!-- ADMIN -->
+    <main id="adminPage" class="admin-page hidden">
+
+        <aside class="admin-sidebar">
+
+            <div class="admin-brand">
+                <img
+                    src="Remove_words_and_resize_image_20260919233757.jpeg">
+                <span>ADMIN STUDIO</span>
+            </div>
+
+            <button class="admin-tab active" data-admin-page="dashboard">
+                Dashboard
+            </button>
+
+            <button class="admin-tab" data-admin-page="editor">
+                Video Editor
+            </button>
+
+            <button class="admin-tab" data-admin-page="library">
+                Media
+            </button>
+
+            <button class="admin-tab" data-admin-page="published">
+                Yayımlananlar
+            </button>
+
+        </aside>
+
+
+        <section class="admin-workspace">
+
+            <!-- DASHBOARD -->
+            <div id="dashboardAdmin" class="admin-section active">
+
+                <div class="admin-heading">
+                    <h1>ADMIN DASHBOARD</h1>
+                    <p>Kontent və Studio idarəsi</p>
+                </div>
+
+                <div class="stats">
+
+                    <div class="stat-card">
+                        <span>FİLMLƏR</span>
+                        <strong id="filmCount">0</strong>
+                    </div>
+
+                    <div class="stat-card">
+                        <span>SERİALLAR</span>
+                        <strong id="seriesCount">0</strong>
+                    </div>
+
+                    <div class="stat-card">
+                        <span>LAYİHƏ</span>
+                        <strong id="clipCount">0</strong>
+                    </div>
+
+                    <div class="stat-card">
+                        <span>TIMELINE</span>
+                        <strong id="timelineDuration">00:00</strong>
+                    </div>
+
+                </div>
+
+                <button
+                    class="main-btn red-btn big-admin-button"
+                    data-open-admin="editor">
+                    EDITORU AÇ
+                </button>
+
+            </div>
+
+
+            <!-- EDITOR -->
+            <div id="editorAdmin" class="admin-section">
+
+                <div class="editor-top">
+
+                    <div>
+                        <h1>VIDEO CUT STUDIO</h1>
+                        <p>CapCut tipli Lion Studio Editor</p>
+                    </div>
+
+                    <div class="editor-actions">
+
+                        <button id="addVideoBtn" class="tool-btn">
+                            + VIDEO
+                        </button>
+
+                        <button id="addImageBtn" class="tool-btn">
+                            + ŞƏKİL
+                        </button>
+
+                        <button id="addTextBtn" class="tool-btn">
+                            + TEXT
+                        </button>
+
+                        <button id="addLogoBtn" class="tool-btn">
+                            + LOQO
+                        </button>
+
+                        <button id="splitBtn" class="tool-btn yellow">
+                            SPLIT
+                        </button>
+
+                        <button id="deleteClipBtn" class="tool-btn danger">
+                            SİL
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <input
+                    id="videoInput"
+                    type="file"
+                    accept="video/*"
+                    multiple
+                    hidden>
+
+                <input
+                    id="imageInput"
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    hidden>
+
+
+                <!-- PROJECT INFO -->
+                <div class="project-info">
+
+                    <div class="field">
+                        <label>Film / Serial adı</label>
+                        <input id="projectTitle" class="input" placeholder="Ad">
+                    </div>
+
+                    <div class="field">
+                        <label>Tip</label>
+                        <select id="projectType" class="input">
+                            <option value="Film">Film</option>
+                            <option value="Serial">Serial</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Açıqlama</label>
+                        <input id="projectDescription" class="input" placeholder="Açıqlama">
+                    </div>
+
+                </div>
+
+
+                <!-- EDITOR -->
+                <div class="editor-layout">
+
+                    <!-- PREVIEW -->
+                    <div class="preview-panel">
+
+                        <div class="preview-header">
+                            <span>PREVIEW</span>
+                            <span id="previewTime">00:00 / 00:00</span>
+                        </div>
+
+                        <div id="previewStage" class="preview-stage">
+
+                            <video
+                                id="previewVideo"
+                                playsinline
+                                preload="metadata">
+                            </video>
+
+                            <canvas id="previewCanvas"></canvas>
+
+                            <div id="previewEmpty">
+                                TIMELINE-A VIDEO ƏLAVƏ EDİN
+                            </div>
+
+                            <div id="previewPlayOverlay" class="preview-play hidden">
+                                PLAY
+                            </div>
+
+                        </div>
+
+                        <div class="preview-controls">
+
+                            <button id="editorPlay" class="control-btn">
+                                PLAY
+                            </button>
+
+                            <button id="editorPause" class="control-btn">
+                                PAUSE
+                            </button>
+
+                            <button id="editorStop" class="control-btn">
+                                STOP
+                            </button>
+
+                            <span id="currentEditorTime">
+                                00:00
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PROPERTIES -->
+                    <div class="properties-panel">
+
+                        <h2>PROPERTIES</h2>
+
+                        <div id="noSelection" class="property-empty">
+                            Timeline-dan element seç.
+                        </div>
+
+                        <div id="clipProperties" class="property-box hidden">
+
+                            <h3>CLIP</h3>
+
+                            <label>Başlanğıc</label>
+                            <input
+                                id="clipStart"
+                                type="number"
+                                min="0"
+                                step="0.1"
+                                class="input">
+
+                            <label>Son</label>
+                            <input
+                                id="clipEnd"
+                                type="number"
+                                min="0"
+                                step="0.1"
+                                class="input">
+
+                            <button id="applyTrim" class="tool-btn full">
+                                TRIM TƏTBİQ ET
+                            </button>
+
+                            <label>Keçid</label>
+
+                            <select id="clipTransition" class="input">
+                                <option value="none">None</option>
+                                <option value="fade">Fade</option>
+                                <option value="zoom">Cinematic Zoom</option>
+                                <option value="slide">Slide</option>
+                                <option value="flash">Flash</option>
+                            </select>
+
+                        </div>
+
+
+                        <div id="textProperties" class="property-box hidden">
+
+                            <h3>CINEMATIC TEXT</h3>
+
+                            <label>Text</label>
+
+                            <input
+                                id="textValue"
+                                class="input"
+                                placeholder="Yazı">
+
+                            <label>Animasiya</label>
+
+                            <select id="textAnimation" class="input">
+                                <option value="cinematic">Cinematic</option>
+                                <option value="fade">Fade In</option>
+                                <option value="slideUp">Slide Up</option>
+                                <option value="slideLeft">Slide Left</option>
+                                <option value="zoom">Zoom</option>
+                                <option value="type">Typewriter</option>
+                            </select>
+
+                            <label>Başlanğıc saniyə</label>
+                            <input
+                                id="textStart"
+                                type="number"
+                                step="0.1"
+                                min="0"
+                                class="input">
+
+                            <label>Müddət</label>
+                            <input
+                                id="textDuration"
+                                type="number"
+                                step="0.1"
+                                min="0.1"
+                                value="5"
+                                class="input">
+
+                            <label>Ölçü</label>
+                            <input
+                                id="textSize"
+                                type="number"
+                                value="56"
+                                min="10"
+                                max="180"
+                                class="input">
+
+                            <button id="applyText" class="tool-btn full">
+                                TEXT YENİLƏ
+                            </button>
+
+                        </div>
+
+
+                        <div id="imageProperties" class="property-box hidden">
+
+                            <h3>IMAGE / LOGO</h3>
+
+                            <label>Başlanğıc</label>
+
+                            <input
+                                id="imageStart"
+                                type="number"
+                                step="0.1"
+                                min="0"
+                                class="input">
+
+                            <label>Müddət</label>
+
+                            <input
+                                id="imageDuration"
+                                type="number"
+                                step="0.1"
+                                min="0.1"
+                                value="5"
+                                class="input">
+
+                            <label>Animasiya</label>
+
+                            <select id="imageAnimation" class="input">
+                                <option value="fade">Fade</option>
+                                <option value="zoom">Zoom</option>
+                                <option value="slide">Slide</option>
+                                <option value="none">None</option>
+                            </select>
+
+                            <button id="applyImage" class="tool-btn full">
+                                TƏTBİQ ET
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TIMELINE -->
+                <div class="timeline-wrapper">
+
+                    <div class="timeline-toolbar">
+
+                        <div class="timeline-title">
+                            TIMELINE
+                        </div>
+
+                        <div class="timeline-tools">
+
+                            <button id="zoomOutTimeline" class="tiny-btn">
+                                −
+                            </button>
+
+                            <span id="timelineScaleText">
+                                1x
+                            </span>
+
+                            <button id="zoomInTimeline" class="tiny-btn">
+                                +
+                            </button>
+
+                            <span class="timeline-total">
+                                TOTAL:
+                                <b id="timelineTotal">00:00</b>
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="timelineScroll"
+                        class="timeline-scroll">
+
+                        <div
+                            id="timelineInner"
+                            class="timeline-inner">
+
+                            <div
+                                id="timelineRuler"
+                                class="timeline-ruler">
+                            </div>
+
+                            <div class="track-row">
+
+                                <div class="track-label">
+                                    VIDEO
+                                </div>
+
+                                <div
+                                    id="videoTrack"
+                                    class="track">
+                                </div>
+
+                            </div>
+
+                            <div class="track-row">
+
+                                <div class="track-label">
+                                    TEXT
+                                </div>
+
+                                <div
+                                    id="textTrack"
+                                    class="track">
+                                </div>
+
+                            </div>
+
+                            <div class="track-row">
+
+                                <div class="track-label">
+                                    IMAGE
+                                </div>
+
+                                <div
+                                    id="imageTrack"
+                                    class="track">
+                                </div>
+
+                            </div>
+
+                            <div
+                                id="playhead"
+                                class="playhead">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COVER -->
+                <div class="publish-panel">
+
+                    <div class="cover-box">
+
+                        <label>Cover</label>
+
+                        <input
+                            id="coverInput"
+                            type="file"
+                            accept="image/*"
+                            class="input">
+
+                        <div id="coverPreview" class="cover-preview">
+                            COVER YOXDUR
+                        </div>
+
+                    </div>
+
+                    <div class="publish-actions">
+
+                        <button
+                            id="exportBtn"
+                            class="main-btn blue-btn">
+                            WEBM EXPORT
+                        </button>
+
+                        <button
+                            id="publishBtn"
+                            class="main-btn red-btn">
+                            YAYIMLA
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MEDIA -->
+            <div id="libraryAdmin" class="admin-section">
+
+                <div class="admin-heading">
+                    <h1>MEDIA</h1>
+                    <p>Editorə əlavə olunan materiallar</p>
+                </div>
+
+                <div id="mediaLibrary" class="media-library"></div>
+
+            </div>
+
+
+            <!-- PUBLISHED -->
+            <div id="publishedAdmin" class="admin-section">
+
+                <div class="admin-heading">
+                    <h1>YAYIMLANANLAR</h1>
+                    <p>Admin tərəfindən yayımlanan kontent</p>
+                </div>
+
+                <div id="adminFilmGrid" class="movie-grid"></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</section>
+
+
+<!-- WATCH MODAL -->
+<div id="watchModal" class="modal hidden">
+
+    <div class="watch-card">
+
+        <button class="close-modal" data-close="watchModal">×</button>
+
+        <video id="watchVideo" controls playsinline></video>
+
+        <div id="watchInfo" class="watch-info"></div>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+<div id="toast" class="toast">
+    <span id="toastText"></span>
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
